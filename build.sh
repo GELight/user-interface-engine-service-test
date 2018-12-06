@@ -1,3 +1,3 @@
 clear
 
-docker build -t mariolinz/user-interface-engine-service-test .
+docker build -t gelight/user-interface-engine-service-test .
