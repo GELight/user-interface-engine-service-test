@@ -1,3 +1,3 @@
-docker build -t mariolinz/user-interface-engine-service-test .
+clear
 
-docker images
+docker build -t mariolinz/user-interface-engine-service-test .

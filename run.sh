@@ -1,1 +1,3 @@
-docker run -p 7000:3000 -d mariolinz/user-ineterface-engine-service-test
+clear
+
+docker run -p 3000:8080 -d mariolinz/user-interface-engine-service-test
