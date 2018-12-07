@@ -2,10 +2,37 @@
 
 clear
 
-docker ps --format "{{.ID}}" --filter name=gelight/user-interface-engine-service-test
+SERVICE_NAME='user-interface-engine-service-test'
 
-#export CONTAINER_ID=$(CONTAINER_ID=docker ps -a | awk '{ print $1,$2 }' | grep gelight/user-interface-engine-service-test | awk '{print $1 }')
-#docker container rm $CONTAINER_ID -f
+echo
+echo '====================================================================================='
+echo
 
-#export IMAGE_ID=$(docker images | awk '{ print $1, $2, $3 }' | grep gelight/user-interface-engine-service-test | awk '{ print $3 }')
-#docker image rm $IMAGE_ID
+export CONTAINER_ID=$(docker ps --format "{{.ID}}" --filter name=$SERVICE_NAME)
+if [ $CONTAINER_ID ]
+then
+    docker container rm $CONTAINER_ID -f
+fi
+
+echo
+
+docker ps --all
+
+echo
+echo
+echo '====================================================================================='
+echo
+
+export IMAGE_ID=$(docker images | awk '{ print $1, $2, $3 }' | grep gelight/$SERVICE_NAME | awk '{ print $3 }')
+if [ $IMAGE_ID ]
+then
+    docker image rm $IMAGE_ID
+fi
+
+echo
+
+docker images
+
+echo
+echo '====================================================================================='
+echo

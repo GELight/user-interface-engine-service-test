@@ -62,7 +62,7 @@ server.get('/description/:id', function(req, res, next) {
 
 server.get('/template/:name', function (req, res, next) {
   
-  var body = '<html><body>' + req.params.name + '</body></html>';
+  var body = '<html><body style="background: #333; color: #ccc;"><h1>' + req.params.name + '</h2></body></html>';
   res.writeHead(200, {
     'Content-Length': Buffer.byteLength(body),
     'Content-Type': 'text/html'
