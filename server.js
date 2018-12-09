@@ -1,10 +1,13 @@
 var restify = require('restify');
- 
+var config = require('./config.js');
+
+console.log(config);
+
 const server = restify.createServer({
-  name: 'myapp',
-  version: '1.0.0'
+  name: config.appName,
+  version: config.version
 });
- 
+
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
