@@ -8,7 +8,8 @@ echo
 echo '====================================================================================='
 echo
 
-export CONTAINER_ID=$(docker ps --format "{{.ID}}" --filter name=$SERVICE_NAME)
+export CONTAINER_ID=$(docker ps -a --no-trunc --format "{{.ID}}" --filter name=^/$SERVICE_NAME$)
+
 if [ $CONTAINER_ID ]
 then
     docker container rm $CONTAINER_ID -f
@@ -23,7 +24,8 @@ echo
 echo '====================================================================================='
 echo
 
-export IMAGE_ID=$(docker images | awk '{ print $1, $2, $3 }' | grep gelight/$SERVICE_NAME | awk '{ print $3 }')
+export IMAGE_ID=$(docker images --format "{{.ID}}" --filter "label=gelight/$SERVICE_NAME")
+
 if [ $IMAGE_ID ]
 then
     docker image rm $IMAGE_ID

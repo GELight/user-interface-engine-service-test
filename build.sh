@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t gelight/user-interface-engine-service-test .
+docker build --label "gelight/user-interface-engine-service-test" -t gelight/user-interface-engine-service-test .
