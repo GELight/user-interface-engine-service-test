@@ -66,11 +66,17 @@ server.get('/description/:id', function(req, res, next) {
     fetch('http://localhost:4000/ui', {
       method: 'post',
       body:    JSON.stringify(serviceData),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/html' },
     })
     .then(res => res.text())
     .then(html => {
-      response.send(html);
+      response.writeHead(200, {
+        'Content-Length': Buffer.byteLength(html),
+        'Content-Type': 'text/html'
+      });
+      response.write(html);
+      response.end();
+
     })
     .catch(err => {
       console.error(err)
