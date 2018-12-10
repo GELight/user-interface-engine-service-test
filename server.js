@@ -1,5 +1,6 @@
-var restify = require('restify');
-var config = require('./config.js');
+const restify = require('restify');
+const config = require('./config.js');
+const fetch = require('node-fetch');
 
 console.log(config);
 
@@ -12,7 +13,7 @@ server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
-var mock = [
+const mock = [
   {
     "id": "ds76s-ds78sd7-gf8f7",
     "type": "Unit",
@@ -53,30 +54,33 @@ var mock = [
 ];
 
 server.get('/description/:id', function(req, res, next) {
-  console.log(req.params.id);
+  
+  const response = res;
+  let serviceData = {};
+  
   if (mock[req.params.id]) {
-    res.send(mock[req.params.id]);
+    serviceData = mock[req.params.id];
+  }
+  
+  if (!req.header('user-interface-id')) {
+    fetch('http://localhost:4000/ui', {
+      method: 'post',
+      body:    JSON.stringify(serviceData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(res => {
+      response.send(res.body);
+    })
+    .catch(err => {
+      console.error(err)
+    });
   } else {
-    res.send({});
+    response.send(serviceData);
   }
   
   return next();
 });
 
-server.get('/template/:name', function (req, res, next) {
-  
-  var body = '<html><body style="background: #333; color: #ccc;"><h1>' + req.params.name + '</h2></body></html>';
-  res.writeHead(200, {
-    'Content-Length': Buffer.byteLength(body),
-    'Content-Type': 'text/html'
-  });
-  res.write(body);
-  res.end();
-
-  return next();
-});
-
- 
 server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
