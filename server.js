@@ -68,8 +68,9 @@ server.get('/description/:id', function(req, res, next) {
       body:    JSON.stringify(serviceData),
       headers: { 'Content-Type': 'application/json' },
     })
-    .then(res => {
-      response.send(res.body);
+    .then(res => res.text())
+    .then(html => {
+      response.send(html);
     })
     .catch(err => {
       console.error(err)
