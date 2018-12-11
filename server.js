@@ -1,12 +1,12 @@
 const restify = require('restify');
-const config = require('./config.js');
 const fetch = require('node-fetch');
+const ServerConfig = require('./server-config.js');
 
-console.log(config);
+console.log(ServerConfig);
 
 const server = restify.createServer({
-  name: config.appName,
-  version: config.version
+  name: ServerConfig.app_name,
+  version: ServerConfig.version
 });
 
 server.use(restify.plugins.acceptParser(server.acceptable));
@@ -88,6 +88,6 @@ server.get('/description/:id', function(req, res, next) {
   return next();
 });
 
-server.listen(8080, function () {
+server.listen(ServerConfig.port, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
