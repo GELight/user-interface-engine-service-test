@@ -1,6 +1,6 @@
 const restify = require('restify');
 const fetch = require('node-fetch');
-const ServerConfig = require('./server-config.js');
+const ServerConfig = require('../server-config.js');
 
 console.log(ServerConfig);
 

@@ -3,9 +3,9 @@
     "version": "0.0.1",
     "description": "User Interface Engine - Service Test",
     "author": "Mario Linz <gelight@gmx.de>",
-    "main": "server.js",
+    "main": "server/server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server/server.js"
     },
     "dependencies": {
         "node-fetch": "^2.3.0",
