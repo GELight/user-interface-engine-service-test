@@ -11,6 +11,7 @@ echo "[2] Build and Run"
 echo "[3] Build"
 echo "[4] Run"
 echo "[5] Delete"
+echo "[6] Open Container Shell"
 echo "[0 or ENTER] Exit"
 printf "\n"
 echo -n "Choose a number: "
@@ -33,6 +34,9 @@ then
 elif [ "$input" = "5" ]
 then
     ./docker-scripts/delete.sh
+elif [ "$input" = "6" ]
+then
+    docker exec -it "user-interface-engine" bash
 elif [ "$input" = "0" ]
 then
     exit;

@@ -63,13 +63,14 @@ server.get('/description/:id', function(req, res, next) {
   }
   
   if (!req.header('user-interface-id')) {
-    fetch('http://localhost:4000/ui', {
+    fetch('http://localhost:3000/ui', {
       method: 'post',
       body:    JSON.stringify(serviceData),
       headers: { 'Content-Type': 'text/html' },
     })
     .then(res => res.text())
     .then(html => {
+      
       response.writeHead(200, {
         'Content-Length': Buffer.byteLength(html),
         'Content-Type': 'text/html'
@@ -79,7 +80,7 @@ server.get('/description/:id', function(req, res, next) {
 
     })
     .catch(err => {
-      console.error(err)
+      console.error(err);
     });
   } else {
     response.send(serviceData);
@@ -89,5 +90,6 @@ server.get('/description/:id', function(req, res, next) {
 });
 
 server.listen(ServerConfig.port, function () {
-  console.log('%s listening at %s', server.name, server.url);
+  console.log('"%s" listening at %s', server.name, server.url);
+  console.log(' Docker Container > http://localhost:' + 3001);
 });
