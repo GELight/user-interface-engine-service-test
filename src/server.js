@@ -1,4 +1,4 @@
-const ServerConfig = require('./server-config.js');
+const ServiceConfig = require('./service-config.js');
 const express = require('express');
 const orm = require('orm');
 const router = require('./router');
@@ -8,8 +8,8 @@ const app = express();
 
 router(app);
 
-app.listen(ServerConfig.port, function () {
-  console.log('Microservice "' + ServerConfig.name + '" is listening to http://localhost:' + ServerConfig.port);
+app.listen(ServiceConfig.port, function () {
+  console.log('Microservice "' + ServiceConfig.name + '" is listening to http://localhost:' + ServiceConfig.port);
 });
 
 
@@ -20,8 +20,8 @@ app.listen(ServerConfig.port, function () {
 /*
 
 const server = restify.createServer({
-  name: ServerConfig.app_name,
-  version: ServerConfig.version
+  name: ServiceConfig.app_name,
+  version: ServiceConfig.version
 });
 
 server.use(restify.plugins.acceptParser(server.acceptable));
@@ -104,7 +104,7 @@ server.get('/description/:id', function(req, res, next) {
   return next();
 });
 
-server.listen(ServerConfig.port, function () {
+server.listen(ServiceConfig.port, function () {
   console.log('"%s" listening at %s', server.name, server.url);
   console.log(' Docker Container > http://localhost:' + 3001);
 });
