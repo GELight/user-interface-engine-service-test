@@ -36,7 +36,7 @@ then
     ./docker-scripts/delete.sh
 elif [ "$input" = "6" ]
 then
-    docker exec -it "user-interface-engine" bash
+    docker exec -it "user-interface-engine-service-test" bash
 elif [ "$input" = "0" ]
 then
     exit;
